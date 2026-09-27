@@ -3,12 +3,13 @@ package main
 import (
 	"log"
 	"net/url"
+	"os"
 
 	"github.com/gorilla/websocket"
 )
 
 func main() {
-	u := url.URL{Scheme: "ws", Host: ":8808", Path: "/build"}
+	u := url.URL{Scheme: "ws", Host: os.Getenv("HOST") + ":8808", Path: "/build"}
 	log.Printf("connecting to %s\n", u.String())
 
 	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
