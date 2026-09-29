@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/url"
 	"os"
@@ -25,8 +26,8 @@ func main() {
 			log.Panic("read:", err)
 			return
 		}
-		log.Printf("recv: %s", bp)
 		build(bp)
-		c.WriteMessage(websocket.TextMessage, []byte("ok"))
+		fmt.Println(bp.Name + ": done")
+		c.WriteMessage(websocket.TextMessage, []byte(bp.Name+": done"))
 	}
 }
